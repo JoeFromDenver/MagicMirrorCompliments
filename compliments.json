@@ -165,6 +165,7 @@
         "You're the best",
         "You're fantastic",
         "You're really flipping smart",
+        "Khaaaaaaaaaaaan",
         "You look awesome today, seriously"
     ],
     "morning" : [
@@ -177,7 +178,10 @@
     "afternoon" : [
         "Hitting your stride!",
         "You are making a difference!",
-        "You're more fun than bubble wrap!"
+        "Is it cold in here?",
+        "Mmmmmm.... The coffee was good this morning",
+        "You're more fun than bubble wrap!",
+        "Did you get a walk in yet?"
     ],
     "evening" : [
         "You made someone smile today, I know it",
