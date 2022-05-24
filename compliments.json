@@ -242,6 +242,7 @@
         "Did you get some sleep?",
         "Chillichella",
         "Mornin' Noogler!",
+        "Is this... a bucket?",
         "You are early today"
     ],
     "afternoon" : [
@@ -265,6 +266,7 @@
         "Good tea, nice house",
         "Prune Juice. A warrior's drink!",
         "Sir, I protest, I am not a merry man!",
+        "Thar be whales here!",
         "Kaleigh O'Keefe, Iron Chocolate is her middle name"
     ],
     "evening" : [
