@@ -1,0 +1,57 @@
+# .github/workflows/add-compliment.yml
+name: Add New Compliment
+
+# This action is triggered by a "repository_dispatch" event
+# We will send this event from our Google Script
+on:
+  repository_dispatch:
+    types: [add-compliment]
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out the repository's code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (which we'll use to easily edit the JSON)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Add the new compliment to the JSON file
+      - name: Update compliments.json
+        run: |
+          # Get the new quote and time-of-day from the "payload"
+          # sent by the Google Script
+          TEXT="${{ github.event.client_payload.text }}"
+          TIME_KEY="${{ github.event.client_payload.time }}"
+          
+          # Use Node.js to read, parse, edit, and write the JSON
+          node -e "
+            const fs = require('fs');
+            const path = './compliments.json';
+            const file = fs.readFileSync(path, 'utf8');
+            const json = JSON.parse(file);
+            
+            // Add the new text to the correct array (e.g., 'morning', 'anytime')
+            if (json[TIME_KEY]) {
+              json[TIME_KEY].push(TEXT);
+              console.log(`Added '${TEXT}' to '${TIME_KEY}'`);
+            } else {
+              console.error(`Error: Key '${TIME_KEY}' not found in compliments.json`);
+              process.exit(1); // Exit with an error
+            }
+            
+            // Write the updated JSON back to the file
+            fs.writeFileSync(path, JSON.stringify(json, null, 2) + '\n');
+          "
+      
+      # 4. Commit the changes back to the repository
+      - name: Commit updated compliments.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Add new compliment ✨"
+          file_pattern: "compliments.json"
