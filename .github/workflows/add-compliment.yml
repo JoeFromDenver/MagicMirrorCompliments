@@ -59,5 +59,5 @@ jobs:
       - name: Commit updated compliments.json
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: Add new compliment ✨"
+          commit_message: "Nice one! What a great addition ✨"
           file_pattern: "compliments.json"
